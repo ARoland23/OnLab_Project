@@ -16,4 +16,11 @@ public class GameInput : MonoBehaviour
         inputVector.Normalize();
         return inputVector;
     }
+
+    public Vector2 GetMousePosition()
+    {
+        return Camera.main.ScreenToWorldPoint( playerInputActions.Player.Look.ReadValue<Vector2>() );
+    }
+
+ 
 }
