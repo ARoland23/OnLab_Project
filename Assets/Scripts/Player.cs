@@ -5,12 +5,15 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7.0f;
     [SerializeField] private GameInput gameInput;
+    //private Aim aim;
     Rigidbody2D rb;
 
     
     private void Start()
     {
-            rb = GetComponent<Rigidbody2D>();
+        Application.targetFrameRate = 30;
+        //aim = GetComponent<Aim>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
@@ -18,8 +21,9 @@ public class Player : MonoBehaviour
         Vector2 inputVector = gameInput.GetMovementNormalVector();
         Vector3 moveDir = new Vector3(inputVector.x, inputVector.y);
 
-            //transform.position += moveDir * Time.deltaTime * moveSpeed;
+        //transform.position += moveDir * Time.deltaTime * moveSpeed;
         rb.linearVelocity = moveDir * moveSpeed * Time.fixedDeltaTime;
+        //rb.MovePosition(rb.transform.position + moveDir * moveSpeed * Time.deltaTime);
     }
     //private void Update()
     //{
@@ -27,7 +31,8 @@ public class Player : MonoBehaviour
     //    Vector3 moveDir = new Vector3(inputVector.x, inputVector.y);
 
     //    //transform.position += moveDir * Time.deltaTime * moveSpeed;
-    //    rb.linearVelocity = moveDir * moveSpeed*Time.deltaTime;
+    //    //rb.linearVelocity = moveDir * moveSpeed*Time.deltaTime;
+    //    //rb.MovePosition(rb.transform.position + moveDir *moveSpeed*Time.deltaTime);
 
 
     //    Debug.Log(inputVector);
