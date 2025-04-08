@@ -22,5 +22,4 @@ public class GameInput : MonoBehaviour
         return Camera.main.ScreenToWorldPoint( playerInputActions.Player.Look.ReadValue<Vector2>() );
     }
 
- 
 }

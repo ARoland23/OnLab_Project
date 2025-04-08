@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerRotation : Rotater
@@ -16,6 +17,6 @@ public class PlayerRotation : Rotater
         //point = gameInput.GetMousePosition();
         point = aim.transform.position;
         lookAt(point);
-        Debug.Log(point);
+        //Debug.Log(point);
     }
 }

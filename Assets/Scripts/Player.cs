@@ -5,10 +5,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7.0f;
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private Animator playerAnimator;
+    private Vector3 moveDir;
     //private Aim aim;
     Rigidbody2D rb;
 
-    
     private void Start()
     {
         Application.targetFrameRate = 30;
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 inputVector = gameInput.GetMovementNormalVector();
-        Vector3 moveDir = new Vector3(inputVector.x, inputVector.y);
+        moveDir = new Vector3(inputVector.x, inputVector.y);
 
         //transform.position += moveDir * Time.deltaTime * moveSpeed;
         rb.linearVelocity = moveDir * moveSpeed * Time.fixedDeltaTime;
