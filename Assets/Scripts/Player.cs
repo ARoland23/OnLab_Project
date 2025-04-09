@@ -1,11 +1,14 @@
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.InputSystem.InputAction;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7.0f;
     [SerializeField] private GameInput gameInput;
-    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private PlayerAnimation playerAnimation;
+    [SerializeField] private WeaponController weaponController;
     private Vector3 moveDir;
     //private Aim aim;
     Rigidbody2D rb;
@@ -16,7 +19,17 @@ public class Player : MonoBehaviour
         //aim = GetComponent<Aim>();
         rb = GetComponent<Rigidbody2D>();
     }
+    public void Shoot(CallbackContext ctx)
+    {
+        if (!ctx.performed)
+            return;
 
+        bool shootSuccess = weaponController.Shoot();
+        if (!shootSuccess)
+            return;
+
+        playerAnimation.OnShoot();
+    }
     private void FixedUpdate()
     {
         Vector2 inputVector = gameInput.GetMovementNormalVector();

@@ -25,10 +25,11 @@ public class PlayerAnimation : MonoBehaviour
         Debug.Log("Switched to Pistol!");
    }
 
-    public void OnShoot(CallbackContext ctx) 
+    public void OnShoot(/*CallbackContext ctx*/) 
     {
-        if (!ctx.performed)
-            return;
+        //if (!ctx.performed)
+        //    return;
+
 
         playerAnimator.SetTrigger("shot");
         Debug.Log("Used weapon!");
