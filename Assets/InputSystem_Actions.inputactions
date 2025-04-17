@@ -78,6 +78,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SwitchToRifle",
+                    "type": "Button",
+                    "id": "8d52ff82-7a5c-4e48-951c-8c9c9ddc5a64",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Sprint",
                     "type": "Button",
                     "id": "641cd816-40e6-41b4-8c3d-04687c349290",
@@ -492,6 +501,17 @@
                     "action": "CycleWeapon",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c7c1e3a0-c713-44bb-9f6b-c4c402ed656a",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "SwitchToRifle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

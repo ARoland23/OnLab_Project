@@ -120,8 +120,8 @@ TextureImporter:
         y: 97
         width: 138
         height: 372
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.50958717, y: 0.699161}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 8820c8b853de1494e9213d6071fb722e
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Riffle_005_0: 1495490905975803912
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

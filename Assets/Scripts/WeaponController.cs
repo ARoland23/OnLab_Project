@@ -6,6 +6,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private float cooldownTimer;
     //[SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Weapon weapon;
+    public Weapon Weapon { get { return weapon; } set {  weapon = value; } }
 
 
     private void Update()
@@ -15,14 +16,13 @@ public class WeaponController : MonoBehaviour
 
     public bool Shoot()
     {
+            if (cooldownTimer < weapon.GetCooldown())
+                return false;
 
-        if (cooldownTimer < weapon.GetCooldown())
-            return false;
+            GameObject bullet = Instantiate(weapon.GetBullet(), weapon.GetBarrelEnd().position, weapon.GetBarrelEnd().rotation, null);
+            bullet.GetComponent<Projectile>().ShootBullet(weapon.GetBarrelEnd());
 
-        GameObject bullet = Instantiate(weapon.GetBullet(),weapon.GetBarrelEnd().position,weapon.GetBarrelEnd().rotation,null);
-        bullet.GetComponent<Projectile>().ShootBullet(weapon.GetBarrelEnd());
-
-        cooldownTimer = 0;
-        return true;
+            cooldownTimer = 0;
+            return true;
     }
 }

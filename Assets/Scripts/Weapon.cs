@@ -13,4 +13,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject bullet;
     public GameObject GetBullet() { return bullet; }
 
+    [SerializeField] private bool automatic;
+    public bool Automatic => automatic;
+
 }

@@ -8,32 +8,25 @@ public class PlayerAnimation : MonoBehaviour
     private Animator playerAnimator;
     [SerializeField] private GameInput gameInput;
 
-    public void OnSwitchToKnife(CallbackContext ctx)
-    {
-        if (!ctx.performed)
-            return;
+    //public void SetFiring(bool firing) => playerAnimator.SetBool("firing", firing);
 
+    public void SwitchToKnife()
+    {
         playerAnimator.SetTrigger("switchedToKnife");
-        Debug.Log("Switched to Knife!");
     }
-   public void OnSwitchToPistol(CallbackContext ctx)
+   public void SwitchToPistol()
    {
-        if (!ctx.performed)
-            return;
-
         playerAnimator.SetTrigger("switchedToPistol");
-        Debug.Log("Switched to Pistol!");
    }
-
-    public void OnShoot(/*CallbackContext ctx*/) 
+    public void SwitchToRifle()
     {
-        //if (!ctx.performed)
-        //    return;
+        playerAnimator.SetTrigger("switchedToRifle");
+    }
 
-
+    public void OnShoot() 
+    {
         playerAnimator.SetTrigger("shot");
         Debug.Log("Used weapon!");
-
     }
 
     void Awake()
