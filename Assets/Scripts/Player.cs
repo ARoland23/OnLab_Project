@@ -14,15 +14,15 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject knifePrefab;
     private GameObject currentWeaponInstance;
     private Vector3 moveDir;
-    //private Aim aim;
     Rigidbody2D rb;
 
     private bool isFiring = false;
 
+    [SerializeField] private GameObject groundWeapon;
+
     private void Start()
     {
         Application.targetFrameRate = 30;
-        //aim = GetComponent<Aim>();
         rb = GetComponent<Rigidbody2D>();
     }
     public void Shoot(CallbackContext ctx)
@@ -57,6 +57,23 @@ public class Player : MonoBehaviour
         currentWeaponInstance  = Instantiate(weaponPrefab,transform);
         Weapon weaponComponent = currentWeaponInstance.GetComponent<Weapon>();
         weaponController.Weapon = weaponComponent;
+
+        switch (weaponComponent.Name)
+        {
+            case ("knife"):
+                playerAnimation.SwitchToKnife();
+                break;
+            case ("pistol"):
+                playerAnimation.SwitchToPistol();
+                break;
+            case ("rifle"):
+                playerAnimation.SwitchToRifle();
+                break;
+            default:
+                playerAnimation.SwitchToKnife();
+                break;
+        }
+        weaponController.RefreshAmmoDisplay();
     }
 
     public void OnSwitchToPistol(CallbackContext ctx)
@@ -65,7 +82,7 @@ public class Player : MonoBehaviour
             return;
 
         EquipWeapon(pistolPrefab);
-        playerAnimation.SwitchToPistol();
+        weaponController.RefreshAmmoDisplay();
         Debug.Log("Switched to Pistol!");
     }
 
@@ -75,7 +92,7 @@ public class Player : MonoBehaviour
             return;
 
         EquipWeapon(riflePrefab);
-        playerAnimation.SwitchToRifle();
+        weaponController.RefreshAmmoDisplay();
         Debug.Log("Switched to Rifle!");
     }
     public void OnSwitchToKnife(CallbackContext ctx)
@@ -84,8 +101,26 @@ public class Player : MonoBehaviour
             return;
 
         EquipWeapon(knifePrefab);
-        playerAnimation.SwitchToKnife();
+        weaponController.RefreshAmmoDisplay();
         Debug.Log("Switched to Knife!");
+    }
+
+    public void Reload(CallbackContext ctx)
+    {
+        if (!ctx.performed)
+            return;
+        weaponController.Reload();
+    }
+
+    //testing
+    public void SpawnWeapon(CallbackContext ctx)
+    {
+        if (!ctx.performed)
+            return;
+        
+        Instantiate(groundWeapon,gameInput.GetMousePosition(), Quaternion.identity);
+        Debug.Log("E pressed");
+
     }
     private void Update()
     {

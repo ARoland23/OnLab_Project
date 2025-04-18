@@ -745,6 +745,7 @@ MonoBehaviour:
   pistolPrefab: {fileID: 3936175607822546096, guid: db308250f21ed4c4181203f5d9f25637, type: 3}
   riflePrefab: {fileID: 3936175607822546096, guid: 14c3159f901951d4cbcf3c08af26dab3, type: 3}
   knifePrefab: {fileID: 3936175607822546096, guid: b47085a1e911c734db8df5e4c092fead, type: 3}
+  groundWeapon: {fileID: 9077171714840499762, guid: 57a51635c311cd242a35342a6b53643b, type: 3}
 --- !u!114 &742167352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,7 +853,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTimer: 0
-  weapon: {fileID: 0}
+  weapon: {fileID: 7650399050593579238, guid: b47085a1e911c734db8df5e4c092fead, type: 3}
+  ammoDisplay: 
 --- !u!4 &838096913
 Transform:
   m_ObjectHideFlags: 0
@@ -868,6 +870,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 742167350}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1123933159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1123933161}
+  - component: {fileID: 1123933160}
+  - component: {fileID: 1123933162}
+  m_Layer: 5
+  m_Name: PlayerPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1123933160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123933159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 0f115a503f5bca64da689d507fde99fb, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: ae962f9b9eeb92b44acbccba2a7fb4de, type: 3}
+  m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+--- !u!4 &1123933161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123933159}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123933162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123933159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9dde3e0374b2494ca99dd12611814d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponController: {fileID: 838096912}
 --- !u!1 &1273773216
 GameObject:
   m_ObjectHideFlags: 0
@@ -4937,6 +5004,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 742167351}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: SpawnWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Attack[/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
@@ -5047,6 +5126,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8d52ff82-7a5c-4e48-951c-8c9c9ddc5a64
     m_ActionName: 'Player/SwitchToRifle[/Keyboard/3]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 742167351}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Reload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 244c9779-0b42-4afd-bc1f-c39ab50a567a
+    m_ActionName: 'Player/Reload[/Keyboard/r]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -6095,3 +6190,4 @@ SceneRoots:
   - {fileID: 1798026388}
   - {fileID: 1989788018}
   - {fileID: 377394452}
+  - {fileID: 1123933161}

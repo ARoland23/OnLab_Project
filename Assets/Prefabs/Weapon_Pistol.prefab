@@ -45,10 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c4b3bcc76b8954785ae0001e4f6da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: pistol
   cooldown: 0.4
   barrelEnd: {fileID: 7850243846673677527}
   bullet: {fileID: 1627611957017052067, guid: b09558118ce0d4549a839206f272c614, type: 3}
   automatic: 0
+  hasAmmo: 1
+  currentAmmo: 0
+  maxAmmo: 10
 --- !u!1 &6826904516995474877
 GameObject:
   m_ObjectHideFlags: 0

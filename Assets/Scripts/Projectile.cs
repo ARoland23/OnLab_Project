@@ -6,6 +6,9 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private float speed;
     [SerializeField] private float lifetime;
+    [SerializeField] private int damage;
+    public int Damage { get { return damage; } }
+
     private float timer;
 
 
@@ -21,7 +24,7 @@ public class Projectile : MonoBehaviour
         transform.position = barrelEnd.position;
         transform.rotation = barrelEnd.rotation;
 
-        this.gameObject.SetActive(true);
+        gameObject.SetActive(true);
 
         rb.AddForce(-transform.up * speed, ForceMode2D.Impulse);
     }
@@ -30,6 +33,6 @@ public class Projectile : MonoBehaviour
     {
         timer += Time.deltaTime;
         if (timer >= lifetime)
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
     }
 }

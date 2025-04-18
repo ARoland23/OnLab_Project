@@ -45,10 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c4b3bcc76b8954785ae0001e4f6da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: knife
   cooldown: 0.25
   barrelEnd: {fileID: 7850243846673677527}
   bullet: {fileID: 1627611957017052067, guid: 9bb30fbaf90dedf49acd17dae5f797b0, type: 3}
   automatic: 0
+  hasAmmo: 0
+  currentAmmo: 0
+  maxAmmo: 0
 --- !u!1 &6826904516995474877
 GameObject:
   m_ObjectHideFlags: 0
