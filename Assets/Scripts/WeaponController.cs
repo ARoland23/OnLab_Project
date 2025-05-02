@@ -4,14 +4,19 @@ using static UnityEngine.InputSystem.InputAction;
 public class WeaponController : MonoBehaviour
 {
     [SerializeField] private float cooldownTimer;
-    //[SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Weapon weapon;
+    [SerializeField] private bool isPlayer;
     public Weapon Weapon { get { return weapon; } set { weapon = value; } }
+
+    [SerializeField] public GameObject WeaponObject;
 
     public string ammoDisplay;
     //public string AmmoDisplay => ammoDisplay;
 
-
+    private void Awake()
+    {
+        weapon = WeaponObject.GetComponent<Weapon>();
+    }
     private void Update()
     {
         cooldownTimer += Time.deltaTime;
@@ -27,13 +32,14 @@ public class WeaponController : MonoBehaviour
 
     public bool Shoot()
     {
-        if (cooldownTimer < weapon.GetCooldown())
+        //Debug.Log("AmmoCount in WeaponController: " + Weapon.CurrentAmmo);
+        if(!CanShoot())
             return false;
 
         if (weapon.HasAmmo)
         {
             if (!UseAmmo())
-                return false; 
+                return false;
         }
 
         GameObject bullet = Instantiate(weapon.GetBullet(), weapon.GetBarrelEnd().position, weapon.GetBarrelEnd().rotation, null);
@@ -44,10 +50,20 @@ public class WeaponController : MonoBehaviour
         return true;
     }
 
+    public bool CanShoot()
+    {
+        Debug.Log("Current Ammo: "+weapon.CurrentAmmo);
+        if (cooldownTimer < weapon.GetCooldown() || weapon.CurrentAmmo < 0)
+            return false;
+        else
+            return true;
+    }
+
     public void Reload()
     {
         weapon.CurrentAmmo = weapon.MaxAmmo;
-        RefreshAmmoDisplay();
+        if(isPlayer)
+            RefreshAmmoDisplay();
     }
 
     public bool UseAmmo()

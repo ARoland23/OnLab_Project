@@ -3,140 +3,143 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
-public class Player : MonoBehaviour
+namespace TopDownPlayer
 {
-    [SerializeField] private float moveSpeed = 7.0f;
-    [SerializeField] private GameInput gameInput;
-    [SerializeField] private PlayerAnimation playerAnimation;
-    [SerializeField] private WeaponController weaponController;
-    [SerializeField] private GameObject pistolPrefab;
-    [SerializeField] private GameObject riflePrefab;
-    [SerializeField] private GameObject knifePrefab;
-    private GameObject currentWeaponInstance;
-    private Vector3 moveDir;
-    Rigidbody2D rb;
-
-    private bool isFiring = false;
-
-    [SerializeField] private GameObject groundWeapon;
-
-    private void Start()
+    public class Player : MonoBehaviour
     {
-        Application.targetFrameRate = 30;
-        rb = GetComponent<Rigidbody2D>();
-    }
-    public void Shoot(CallbackContext ctx)
-    {
-        if (weaponController.Weapon == null)
-            return;
+        [SerializeField] private float moveSpeed = 7.0f;
+        [SerializeField] private int health = 100;
+        [SerializeField] private GameInput gameInput;
+        [SerializeField] private PlayerAnimation playerAnimation;
+        [SerializeField] private WeaponController weaponController;
+        [SerializeField] private GameObject pistolPrefab;
+        [SerializeField] private GameObject riflePrefab;
+        [SerializeField] private GameObject knifePrefab;
+        private GameObject currentWeaponInstance;
+        private Vector3 moveDir;
+        Rigidbody2D rb;
 
-        if (weaponController.Weapon.Automatic)
+        private bool isFiring = false;
+
+
+        private void Start()
         {
-            if (ctx.started)
-                isFiring = true;
-            else if (ctx.canceled)
-                isFiring = false;
+            Application.targetFrameRate = 30;
+            rb = GetComponent<Rigidbody2D>();
         }
-        else
+        public void Shoot(CallbackContext ctx)
         {
-            if (ctx.performed)
+            if (weaponController.Weapon == null)
+                return;
+
+            if (weaponController.Weapon.Automatic)
+            {
+                if (ctx.started)
+                    isFiring = true;
+                else if (ctx.canceled)
+                    isFiring = false;
+            }
+            else
+            {
+                if (ctx.performed)
+                {
+                    bool shootSuccess = weaponController.Shoot();
+                    if (shootSuccess)
+                        playerAnimation.OnShoot();
+                }
+            }
+        }
+        public void EquipWeapon(GameObject weaponPrefab)
+        {
+            if (currentWeaponInstance != null)
+            {
+                Destroy(currentWeaponInstance);
+            }
+
+            currentWeaponInstance = Instantiate(weaponPrefab, transform);
+            Weapon weaponComponent = currentWeaponInstance.GetComponent<Weapon>();
+            weaponController.Weapon = weaponComponent;
+
+            switch (weaponComponent.Name)
+            {
+                case ("knife"):
+                    playerAnimation.SwitchToKnife();
+                    break;
+                case ("pistol"):
+                    playerAnimation.SwitchToPistol();
+                    break;
+                case ("rifle"):
+                    playerAnimation.SwitchToRifle();
+                    break;
+                default:
+                    playerAnimation.SwitchToKnife();
+                    break;
+            }
+            weaponController.RefreshAmmoDisplay();
+        }
+
+        public void OnSwitchToPistol(CallbackContext ctx)
+        {
+            if (!ctx.performed)
+                return;
+
+            EquipWeapon(pistolPrefab);
+            weaponController.RefreshAmmoDisplay();
+            Debug.Log("Switched to Pistol!");
+        }
+
+        public void OnSwitchToRifle(CallbackContext ctx)
+        {
+            if (!ctx.performed)
+                return;
+
+            EquipWeapon(riflePrefab);
+            weaponController.RefreshAmmoDisplay();
+            Debug.Log("Switched to Rifle!");
+        }
+        public void OnSwitchToKnife(CallbackContext ctx)
+        {
+            if (!ctx.performed)
+                return;
+
+            EquipWeapon(knifePrefab);
+            weaponController.RefreshAmmoDisplay();
+            Debug.Log("Switched to Knife!");
+        }
+
+        public void Reload(CallbackContext ctx)
+        {
+            if (!ctx.performed)
+                return;
+            weaponController.Reload();
+        }
+
+        public void PickupHealth(GameObject healthPrefab)
+        {
+            Health hpPrefab = healthPrefab.GetComponent<Health>();
+            health += hpPrefab.HealthPoint;
+            if (health > 100)
+                health = 100;
+        }
+
+        private void Update()
+        {
+            if (weaponController.Weapon.Automatic && isFiring)
             {
                 bool shootSuccess = weaponController.Shoot();
                 if (shootSuccess)
-                    playerAnimation.OnShoot(); 
+                    playerAnimation.OnShoot();
             }
         }
-    }
-    public void EquipWeapon(GameObject weaponPrefab)
-    {
-        if(currentWeaponInstance != null)
+        private void FixedUpdate()
         {
-            Destroy(currentWeaponInstance);
+            Vector2 inputVector = gameInput.GetMovementNormalVector();
+            moveDir = new Vector3(inputVector.x, inputVector.y);
+
+            rb.linearVelocity = moveDir * moveSpeed * Time.fixedDeltaTime;
         }
 
-        currentWeaponInstance  = Instantiate(weaponPrefab,transform);
-        Weapon weaponComponent = currentWeaponInstance.GetComponent<Weapon>();
-        weaponController.Weapon = weaponComponent;
-
-        switch (weaponComponent.Name)
-        {
-            case ("knife"):
-                playerAnimation.SwitchToKnife();
-                break;
-            case ("pistol"):
-                playerAnimation.SwitchToPistol();
-                break;
-            case ("rifle"):
-                playerAnimation.SwitchToRifle();
-                break;
-            default:
-                playerAnimation.SwitchToKnife();
-                break;
-        }
-        weaponController.RefreshAmmoDisplay();
-    }
-
-    public void OnSwitchToPistol(CallbackContext ctx)
-    {
-        if (!ctx.performed)
-            return;
-
-        EquipWeapon(pistolPrefab);
-        weaponController.RefreshAmmoDisplay();
-        Debug.Log("Switched to Pistol!");
-    }
-
-    public void OnSwitchToRifle(CallbackContext ctx)
-    {
-        if (!ctx.performed)
-            return;
-
-        EquipWeapon(riflePrefab);
-        weaponController.RefreshAmmoDisplay();
-        Debug.Log("Switched to Rifle!");
-    }
-    public void OnSwitchToKnife(CallbackContext ctx)
-    {
-        if (!ctx.performed)
-            return;
-
-        EquipWeapon(knifePrefab);
-        weaponController.RefreshAmmoDisplay();
-        Debug.Log("Switched to Knife!");
-    }
-
-    public void Reload(CallbackContext ctx)
-    {
-        if (!ctx.performed)
-            return;
-        weaponController.Reload();
-    }
-
-    //testing
-    public void SpawnWeapon(CallbackContext ctx)
-    {
-        if (!ctx.performed)
-            return;
-        
-        Instantiate(groundWeapon,gameInput.GetMousePosition(), Quaternion.identity);
-        Debug.Log("E pressed");
-
-    }
-    private void Update()
-    {
-        if (weaponController.Weapon.Automatic && isFiring)
-        {
-            bool shootSuccess = weaponController.Shoot();
-            if (shootSuccess)
-                playerAnimation.OnShoot();
-        }
-    }
-    private void FixedUpdate()
-    {
-        Vector2 inputVector = gameInput.GetMovementNormalVector();
-        moveDir = new Vector3(inputVector.x, inputVector.y);
-
-        rb.linearVelocity = moveDir * moveSpeed * Time.fixedDeltaTime;
     }
 
 }
+

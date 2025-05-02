@@ -29,7 +29,7 @@ public class PlayerAnimation : MonoBehaviour
         Debug.Log("Used weapon!");
     }
 
-    void Awake()
+    void Start()
     {
         playerAnimator = GetComponentInParent<Animator>();
     }

@@ -1,25 +1,25 @@
 using UnityEngine;
-
+using TopDownPlayer;
 public class GroundObject : MonoBehaviour
 {
     [SerializeField] private GameObject weaponPrefab;
-    [SerializeField] private Player player;
     [SerializeField] private GameObject healthPrefab;
 
-
-    private void Awake()
-    {
-        player = GetComponentInParent<Player>();
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(player != null)
+        Player player = collision.GetComponent<Player>();
+
+        if(player != null && weaponPrefab != null)          // weapon pickup
         {
-            if(weaponPrefab != null)
-            {
                 player.EquipWeapon(weaponPrefab);
-                Destroy(weaponPrefab);
-            }
+                Destroy(gameObject);
+
+        }
+
+        else if (player != null && healthPrefab != null)         // health pickup
+        {
+            player.PickupHealth(healthPrefab);
+            Destroy(gameObject);
 
         }
     }

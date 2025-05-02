@@ -29,6 +29,16 @@ public class Projectile : MonoBehaviour
         rb.AddForce(-transform.up * speed, ForceMode2D.Impulse);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        EnemyBase eb = collision.gameObject.GetComponent<EnemyBase>();
+        if (eb != null)
+        {
+            eb.RecieveDamage(damage);
+            Destroy(gameObject);
+        }
+    }
+
     private void Update()
     {
         timer += Time.deltaTime;
