@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1849923729982079741, guid: 1b969c444cf090241ac858a20d8abddc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.3918943
+      value: -4.8506637
       objectReference: {fileID: 0}
     - target: {fileID: 1849923729982079741, guid: 1b969c444cf090241ac858a20d8abddc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.66505194
+      value: -4.973826
       objectReference: {fileID: 0}
     - target: {fileID: 1849923729982079741, guid: 1b969c444cf090241ac858a20d8abddc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 6760848897275069879, guid: 1b969c444cf090241ac858a20d8abddc, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -7080525454710132814, guid: 4f06a294738efe04d97ab8bd83269527, type: 3}
+      objectReference: {fileID: -5444044110743601799, guid: bfd224d53ddd1784b940aaed76402c24, type: 3}
     - target: {fileID: 7070244892065178647, guid: 1b969c444cf090241ac858a20d8abddc, type: 3}
       propertyPath: WeaponObject
       value: 
