@@ -61,12 +61,6 @@ public class EnemyBase : MonoBehaviour
             if(wc.Shoot())
                 enemyAnimation.OnShoot();
         }
-        //if (wc.Weapon.CurrentAmmo < 1)
-        //{
-        //   StartCoroutine( Reload() );
-        //}
-
-        
     }
     // 10 másodpercenként újratölt
     private IEnumerator Reload()

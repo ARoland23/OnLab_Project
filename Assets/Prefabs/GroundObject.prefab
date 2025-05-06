@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8306231306921355127}
   m_Layer: 0
   m_Name: GroundObject
-  m_TagString: Untagged
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,5 +148,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 3936175607822546096, guid: 14c3159f901951d4cbcf3c08af26dab3, type: 3}
-  player: {fileID: 0}
   healthPrefab: {fileID: 0}

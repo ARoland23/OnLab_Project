@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundObjectPistol
       objectReference: {fileID: 0}
+    - target: {fileID: 283172107564574760, guid: 8d3654238df219147aa8dc80b699c091, type: 3}
+      propertyPath: m_TagString
+      value: Pickup
+      objectReference: {fileID: 0}
     - target: {fileID: 867598008684027831, guid: 8d3654238df219147aa8dc80b699c091, type: 3}
       propertyPath: m_Sprite
       value: 

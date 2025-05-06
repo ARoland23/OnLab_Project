@@ -11,6 +11,7 @@ public class SimpleRandomWalkMapGenerator : AbstractMapGenerator
 
     protected override void RunProceduralGeneration()
     {
+        objectPlacer.Clear();
         tilemapVisualizer.Clear();
         HashSet<Vector2Int> floorpositions = RunRandomWalk();
         tilemapVisualizer.PaintFloorTiles(floorpositions);
