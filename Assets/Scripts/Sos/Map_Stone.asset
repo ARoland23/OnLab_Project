@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7147016e6dd1847a47397086e89df0, type: 3}
+  m_Name: Map_Stone
+  m_EditorClassIdentifier: 
+  floorTile: {fileID: 11400000, guid: 0a2f3d45101e4b84ca36a873e6ed9563, type: 2}
+  wallTop: {fileID: 11400000, guid: 0209dd2e48887d34285041b49d3b895a, type: 2}
+  tiles:
+  - {fileID: 11400000, guid: 179833a20d75b1e4e9306362905655d4, type: 2}
+  - {fileID: 11400000, guid: 2dae83940f3af3a4b8f9170b94528ec2, type: 2}
+  - {fileID: 11400000, guid: b6c4529590557aa4889e00930dd277d1, type: 2}
+  - {fileID: 11400000, guid: 427292699f85fa94c9945a422e74c7d7, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: fa18949c4ec82464fb49d04a7ad2fabb, type: 2}
+  - {fileID: 11400000, guid: 983f3c950d652084c95ad6a7240c30d4, type: 2}
+  - {fileID: 11400000, guid: c406aec4ceaca3748a5e0ce93c16e4d6, type: 2}
+  - {fileID: 11400000, guid: 4dbb6da34bd6820468c617cacca1f5c7, type: 2}
+  objects: []

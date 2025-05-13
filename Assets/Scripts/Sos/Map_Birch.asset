@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7147016e6dd1847a47397086e89df0, type: 3}
+  m_Name: Map_Birch
+  m_EditorClassIdentifier: 
+  floorTile: {fileID: 11400000, guid: 2f07b52324e7150498b0734f4fbfcaec, type: 2}
+  wallTop: {fileID: 11400000, guid: 87bd29739d68673408f73370826ccd04, type: 2}
+  tiles:
+  - {fileID: 11400000, guid: 29eef0efd54b2c34f837ac5a76b2e13f, type: 2}
+  - {fileID: 11400000, guid: ad86acd167249e44f82c75bde25b585b, type: 2}
+  - {fileID: 11400000, guid: edeeae292751ed74ab0cf70cd6ae657e, type: 2}
+  - {fileID: 11400000, guid: 67dc676d533d46a4bbe67e300ade5fcd, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 2ccab98592926434da411180ce412084, type: 2}
+  - {fileID: 11400000, guid: d5882939779ba9f4fbfbfb9a99246cb8, type: 2}
+  - {fileID: 11400000, guid: 78fcdb358fb41794d9618dd355fba25b, type: 2}
+  - {fileID: 11400000, guid: b9ba9627bc0663c408bbd9dda42a3afc, type: 2}
+  objects: []

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7147016e6dd1847a47397086e89df0, type: 3}
+  m_Name: Map_Oak
+  m_EditorClassIdentifier: 
+  floorTile: {fileID: 11400000, guid: 5f4d852d329edf94e972b7bebec3d5d3, type: 2}
+  wallTop: {fileID: 11400000, guid: 7a35f6ec12c0fc949b51279e2dc7a2cc, type: 2}
+  tiles:
+  - {fileID: 11400000, guid: 48baf61bdb2218d4d9b862bb8e2dbe03, type: 2}
+  - {fileID: 11400000, guid: 1417f608a815ec9448e3c4b335ad195d, type: 2}
+  - {fileID: 11400000, guid: f3ff10111dc014846af6405d01b1a457, type: 2}
+  - {fileID: 11400000, guid: 0367f2cdc94ddaf419a9699ef76d9883, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 4dda9b7dc78fbe04cb6083c2c8fce551, type: 2}
+  - {fileID: 11400000, guid: a36e09ec82ad1e747a522ce42a8771b1, type: 2}
+  - {fileID: 11400000, guid: 52050196b73ec2742bd5d2e3e66c072c, type: 2}
+  - {fileID: 11400000, guid: 9b6f29786b378bd4995b3ddba6280067, type: 2}
+  objects: []

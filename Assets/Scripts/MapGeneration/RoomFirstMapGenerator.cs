@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RoomFirstMapGenerator : SimpleRandomWalkMapGenerator
 {
@@ -13,6 +15,7 @@ public class RoomFirstMapGenerator : SimpleRandomWalkMapGenerator
     [SerializeField] private int offset = 0;
 
     [SerializeField] private bool RandomWalkRooms = false;
+    [SerializeField] private TilemapVisualizerSO[] tilemapVisualizerSOs;
 
    // private List<BoundsInt> roomsList;
 
@@ -25,10 +28,10 @@ public class RoomFirstMapGenerator : SimpleRandomWalkMapGenerator
     private void CreateRooms()
     {
         var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning( new BoundsInt((Vector3Int)startPosition,new Vector3Int(mapWidth, mapHeight, 0)), minRoomWidth, minRoomHeight);
-
+        tilemapVisualizer.tilemapVisualizerSO = tilemapVisualizerSOs[Random.Range(0, tilemapVisualizerSOs.Length)];
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
         floor = CreateSimpleRooms(roomsList);
-
+        //floor = CreateDistinctRooms(roomsList,tilemapVisualizerSOs);
         List<Vector2Int> roomCenters = new List<Vector2Int>();
         //Vector2Int playerRoomPosition = new Vector2Int(int.MaxValue,int.MaxValue);
         foreach (var room in roomsList)
@@ -161,6 +164,29 @@ public class RoomFirstMapGenerator : SimpleRandomWalkMapGenerator
                     floor.Add(position);
                 }
             }
+        }
+        return floor;
+    }
+
+    private HashSet<Vector2Int> CreateDistinctRooms(List<BoundsInt> roomsList, TilemapVisualizerSO[] tilemapVisualizerSOs)
+    {
+        HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+        foreach (var room in roomsList)
+        {
+            tilemapVisualizer.tilemapVisualizerSO = tilemapVisualizerSOs[Random.Range(0, tilemapVisualizerSOs.Length)];
+
+            HashSet<Vector2Int> roomFloor = new HashSet<Vector2Int>();
+            for (int col = offset; col < room.size.x - offset; col++)
+            {
+                for (int row = offset; row < room.size.y - offset; row++)
+                {
+                    Vector2Int position = (Vector2Int)room.min + new Vector2Int(col, row);
+                    roomFloor.Add(position);
+                }
+            }
+            WallGenerator.CreateWalls(floor, tilemapVisualizer);
+            tilemapVisualizer.PaintFloorTiles(roomFloor);
+            floor.UnionWith(roomFloor);
         }
         return floor;
     }
