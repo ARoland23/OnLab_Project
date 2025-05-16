@@ -1,3 +1,4 @@
+using TopDownPlayer;
 using Unity.Entities.UniversalDelegates;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float lifetime;
     [SerializeField] private int damage;
+    private GameObject shotBy;
+    public GameObject ShotBy { get => shotBy; set => shotBy = value;  }
     public int Damage { get { return damage; } }
 
     private float timer;
@@ -31,16 +34,28 @@ public class Projectile : MonoBehaviour
     // tölténynek
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject == shotBy)
+            return;
+
         EnemyBase eb = collision.gameObject.GetComponent<EnemyBase>();
+        Player player = collision.gameObject.GetComponent<Player>();
         if (eb != null)
         {
             eb.RecieveDamage(damage);
             Destroy(gameObject);
+        }else if(player != null)
+        {
+            player.RecieveDamage(damage);
+            Destroy(gameObject);
         }
+        
     }
     // késnek
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject == shotBy)
+            return;
+
         EnemyBase eb = collision.gameObject.GetComponent<EnemyBase>();
         if (eb != null)
         {

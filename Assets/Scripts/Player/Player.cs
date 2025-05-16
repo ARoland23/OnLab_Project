@@ -15,6 +15,7 @@ namespace TopDownPlayer
         [SerializeField] private GameObject pistolPrefab;
         [SerializeField] private GameObject riflePrefab;
         [SerializeField] private GameObject knifePrefab;
+        private bool dead = false;
         private GameObject currentWeaponInstance;
         private Vector3 moveDir;
         Rigidbody2D rb;
@@ -26,6 +27,7 @@ namespace TopDownPlayer
         {
             Application.targetFrameRate = 30;
             rb = GetComponent<Rigidbody2D>();
+            rb.simulated = true;
         }
         public void Shoot(CallbackContext ctx)
         {
@@ -120,6 +122,18 @@ namespace TopDownPlayer
             health += hpPrefab.HealthPoint;
             if (health > 100)
                 health = 100;
+        }
+        public void RecieveDamage(int damage)
+        {
+            health -= damage;
+            if (health <= 0 && !dead)
+            {
+                dead = true;
+                rb.simulated = false;
+                GetComponentInChildren<SpriteRenderer>().sortingLayerName = "WalkInFront";
+                playerAnimation.OnDeath();
+                //Destroy(this);
+            }
         }
 
         private void Update()

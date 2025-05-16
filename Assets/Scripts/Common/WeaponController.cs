@@ -43,7 +43,11 @@ public class WeaponController : MonoBehaviour
         }
 
         GameObject bullet = Instantiate(weapon.GetBullet(), weapon.GetBarrelEnd().position, weapon.GetBarrelEnd().rotation, null);
-        bullet.GetComponent<Projectile>().ShootBullet(weapon.GetBarrelEnd());
+        Projectile projectile = bullet.GetComponent<Projectile>();
+        projectile.ShotBy = transform.root.gameObject;
+        projectile.ShootBullet(weapon.GetBarrelEnd());
+        //bullet.GetComponent<Projectile>().ShootBullet(weapon.GetBarrelEnd());
+
 
         cooldownTimer = 0;
         RefreshAmmoDisplay();

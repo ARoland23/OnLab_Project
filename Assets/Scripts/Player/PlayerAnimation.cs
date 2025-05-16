@@ -28,6 +28,10 @@ public class PlayerAnimation : MonoBehaviour
         playerAnimator.SetTrigger("shot");
         Debug.Log("Used weapon!");
     }
+    public void OnDeath()
+    {
+        playerAnimator.SetTrigger("die");
+    }
 
     void Start()
     {
@@ -38,4 +42,6 @@ public class PlayerAnimation : MonoBehaviour
     {
         playerAnimator.SetBool("running", gameInput.GetMovementNormalVector() != Vector2.zero);
     }
+
+ 
 }
