@@ -12,8 +12,9 @@ public class EnemyBase : MonoBehaviour
     private EnemyAnimation enemyAnimation;
     [SerializeField] private GameObject WeaponObject;
     private GameObject currentWeaponInstance;
-    private Weapon weapon;
+    //private Weapon weapon;
     private WeaponController wc;
+    [SerializeField] private GameObject groundObjectPrefab;
     private bool dead = false;
     public Transform PlayerTransfrom => playerTransform;
     System.Random random = new System.Random();
@@ -49,8 +50,23 @@ public class EnemyBase : MonoBehaviour
             rb.simulated = false;
             GetComponentInChildren<SpriteRenderer>().sortingLayerName = "WalkInFront";
             enemyAnimation.OnDeath();
+            DropWeapon();
             Destroy(this);
         }
+    }
+
+    private void DropWeapon()
+    {
+        if (groundObjectPrefab == null)
+            return;
+
+        GameObject drop = Instantiate(groundObjectPrefab, transform.position,Quaternion.identity);
+        GroundObject groundObj = drop.GetComponent<GroundObject>();
+
+        if (groundObj == null)
+            return;
+
+        groundObj.SetWeapon(wc.Weapon.CurrentAmmo);
     }
 
     public void Shoot()
@@ -67,7 +83,7 @@ public class EnemyBase : MonoBehaviour
     {
         for(; ; )
         {
-            wc.Reload();
+            wc.Reload(wc.Weapon.MagazineAmmo);
             yield return new WaitForSeconds(10);
         }
     }

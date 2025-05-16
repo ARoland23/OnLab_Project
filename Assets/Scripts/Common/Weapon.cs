@@ -24,11 +24,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] private int currentAmmo;
     public int CurrentAmmo { get { return currentAmmo; } set { currentAmmo = value; } }
 
-    [SerializeField] private int maxAmmo;
-    public int MaxAmmo { get { return maxAmmo; } }
+    [SerializeField] private int magazineAmmo;
+    public int MagazineAmmo { get { return magazineAmmo; } }
 
     private void Awake()
     {
-        currentAmmo = maxAmmo;
+        currentAmmo = magazineAmmo;
     }
 }

@@ -5,6 +5,11 @@ public class GroundObject : MonoBehaviour
     [SerializeField] private GameObject weaponPrefab;
     [SerializeField] private GameObject healthPrefab;
 
+    public void SetWeapon(int ammo)
+    {
+        weaponPrefab.GetComponent<Weapon>().CurrentAmmo = ammo;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Player player = collision.GetComponent<Player>();

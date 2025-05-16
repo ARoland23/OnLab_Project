@@ -7,9 +7,9 @@
                 <ui:DataBinding property="title" data-source-path="health" data-source-type="TopDownPlayer.Player, Assembly-CSharp" binding-mode="ToTarget" />
             </Bindings>
         </ui:ProgressBar>
-        <ui:Label text="Ammo: 10/50" name="AmmoLabel" style="width: 323px; height: 56px; font-size: 50px; -unity-text-outline-width: 1px; color: rgb(5, 255, 233); -unity-text-align: upper-left; -unity-font-definition: resource(&apos;FlatSkin/Font/Roboto-Light&apos;);">
+        <ui:Label text="Ammo: 10/50" name="AmmoLabel" selectable="false" style="width: 323px; height: 56px; font-size: 50px; -unity-text-outline-width: 1px; color: rgb(5, 255, 233); -unity-text-align: upper-left; -unity-font-definition: resource(&apos;FlatSkin/Font/Roboto-Light&apos;);">
             <Bindings>
-                <ui:DataBinding property="text" data-source-path="ammoDisplay" data-source-type="WeaponController, Assembly-CSharp" binding-mode="ToTarget" />
+                <ui:DataBinding property="text" data-source-path="ammoDisplay" data-source-type="TopDownPlayer.Player, Assembly-CSharp" binding-mode="ToTarget" />
             </Bindings>
         </ui:Label>
     </ui:VisualElement>

@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: WeaponObject
       value: 
       objectReference: {fileID: 3936175607822546096, guid: db308250f21ed4c4181203f5d9f25637, type: 3}
+    - target: {fileID: 7070244892065178647, guid: 1b969c444cf090241ac858a20d8abddc, type: 3}
+      propertyPath: groundObjectPrefab
+      value: 
+      objectReference: {fileID: 1108433210203660798, guid: 7fda9708078eda048bcfd07ad65fd12b, type: 3}
     - target: {fileID: 8316563093847539929, guid: 1b969c444cf090241ac858a20d8abddc, type: 3}
       propertyPath: m_Name
       value: Enemy Variant

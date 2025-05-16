@@ -52,7 +52,7 @@ MonoBehaviour:
   automatic: 0
   hasAmmo: 1
   currentAmmo: 0
-  maxAmmo: 10
+  magazineAmmo: 15
 --- !u!1 &6826904516995474877
 GameObject:
   m_ObjectHideFlags: 0

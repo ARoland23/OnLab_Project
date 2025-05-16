@@ -10,7 +10,7 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField] public GameObject WeaponObject;
 
-    public string ammoDisplay;
+    //public string ammoDisplay;
     //public string AmmoDisplay => ammoDisplay;
 
     private void Awake()
@@ -22,13 +22,13 @@ public class WeaponController : MonoBehaviour
         cooldownTimer += Time.deltaTime;
     }
 
-    public void RefreshAmmoDisplay()
-    {
-        if (weapon.HasAmmo)
-            ammoDisplay = $"Ammo: {weapon.CurrentAmmo}/{weapon.MaxAmmo}";
-        else
-            ammoDisplay = "";
-    }
+    //public void RefreshAmmoDisplay()
+    //{
+    //    if (weapon.HasAmmo)
+    //        ammoDisplay = $"Ammo: {weapon.CurrentAmmo}/{weapon.MagazineAmmo}";
+    //    else
+    //        ammoDisplay = "";
+    //}
 
     public bool Shoot()
     {
@@ -50,7 +50,7 @@ public class WeaponController : MonoBehaviour
 
 
         cooldownTimer = 0;
-        RefreshAmmoDisplay();
+        //RefreshAmmoDisplay();
         return true;
     }
 
@@ -63,11 +63,11 @@ public class WeaponController : MonoBehaviour
             return true;
     }
 
-    public void Reload()
+    public void Reload(int ammo)
     {
-        weapon.CurrentAmmo = weapon.MaxAmmo;
-        if(isPlayer)
-            RefreshAmmoDisplay();
+        weapon.CurrentAmmo = ammo;//weapon.MagazineAmmo;
+        //if(isPlayer)
+        //    RefreshAmmoDisplay();
     }
 
     public bool UseAmmo()

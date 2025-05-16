@@ -176,6 +176,7 @@ MonoBehaviour:
   health: 100
   moveSpeed: 200
   WeaponObject: {fileID: 3936175607822546096, guid: 14c3159f901951d4cbcf3c08af26dab3, type: 3}
+  groundObjectPrefab: {fileID: 9077171714840499762, guid: 57a51635c311cd242a35342a6b53643b, type: 3}
 --- !u!114 &8843496329685859982
 MonoBehaviour:
   m_ObjectHideFlags: 0

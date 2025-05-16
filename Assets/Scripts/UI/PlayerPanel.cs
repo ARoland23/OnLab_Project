@@ -21,6 +21,6 @@ public class PlayerPanel : MonoBehaviour
         ammoLabel = document.rootVisualElement.Q("AmmoLabel") as Label;
         healthBar = document.rootVisualElement.Q("HealthBar") as ProgressBar;
         healthBar.dataSource = player;
-        ammoLabel.dataSource = weaponController;
+        ammoLabel.dataSource = player;
     }
 }
