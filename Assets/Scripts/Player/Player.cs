@@ -124,6 +124,7 @@ namespace TopDownPlayer
                 weaponController.Weapon = currentWeaponInstance.GetComponent<Weapon>();
                 weaponController.Weapon.CurrentAmmo = weapon.CurrentAmmo;
             }
+            RefreshAmmoDisplay();
         }
 
         public void OnSwitchToPistol(CallbackContext ctx)
