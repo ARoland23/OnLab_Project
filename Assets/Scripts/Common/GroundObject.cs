@@ -16,9 +16,8 @@ public class GroundObject : MonoBehaviour
 
         if(player != null && weaponPrefab != null)          // weapon pickup
         {
-                player.EquipWeapon(weaponPrefab);
+                player.PickupWeapon(weaponPrefab);
                 Destroy(gameObject);
-
         }
 
         else if (player != null && healthPrefab != null)         // health pickup

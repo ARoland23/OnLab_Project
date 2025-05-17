@@ -12,9 +12,6 @@ public class PlayerPanel : MonoBehaviour
     private Label ammoLabel;
     private ProgressBar healthBar;
 
-    //[UxmlAttribute,CreateProperty]
-    //public string ammotext;
-
     private void Start()
     {
         document = GetComponent<UIDocument>();

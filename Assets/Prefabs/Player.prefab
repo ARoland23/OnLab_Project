@@ -407,7 +407,6 @@ MonoBehaviour:
   weapon: {fileID: 7650399050593579238, guid: b47085a1e911c734db8df5e4c092fead, type: 3}
   isPlayer: 1
   WeaponObject: {fileID: 3936175607822546096, guid: db308250f21ed4c4181203f5d9f25637, type: 3}
-  ammoDisplay: 
 --- !u!1 &7368206009686557118
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +478,7 @@ GameObject:
   - component: {fileID: 2812319630648785902}
   - component: {fileID: 2398028415630616480}
   - component: {fileID: 2269931888684356051}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -522,9 +521,8 @@ MonoBehaviour:
   gameInput: {fileID: 6116237726415980742}
   playerAnimation: {fileID: 959121792617699031}
   weaponController: {fileID: 8275697597457101636}
-  pistolPrefab: {fileID: 3936175607822546096, guid: db308250f21ed4c4181203f5d9f25637, type: 3}
-  riflePrefab: {fileID: 3936175607822546096, guid: 14c3159f901951d4cbcf3c08af26dab3, type: 3}
   knifePrefab: {fileID: 3936175607822546096, guid: b47085a1e911c734db8df5e4c092fead, type: 3}
+  ammoDisplay: 
 --- !u!114 &2812319630648785902
 MonoBehaviour:
   m_ObjectHideFlags: 0

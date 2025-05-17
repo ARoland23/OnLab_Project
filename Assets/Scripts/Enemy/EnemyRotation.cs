@@ -11,6 +11,7 @@ public class EnemyRotation : Rotater
     }
     private void FixedUpdate()
     {
+     if(eb.canSeePlayer)   
         lookAt(target.position);
     }
 }

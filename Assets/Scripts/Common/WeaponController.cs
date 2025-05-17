@@ -22,17 +22,8 @@ public class WeaponController : MonoBehaviour
         cooldownTimer += Time.deltaTime;
     }
 
-    //public void RefreshAmmoDisplay()
-    //{
-    //    if (weapon.HasAmmo)
-    //        ammoDisplay = $"Ammo: {weapon.CurrentAmmo}/{weapon.MagazineAmmo}";
-    //    else
-    //        ammoDisplay = "";
-    //}
-
     public bool Shoot()
     {
-        //Debug.Log("AmmoCount in WeaponController: " + Weapon.CurrentAmmo);
         if(!CanShoot())
             return false;
 
@@ -56,7 +47,6 @@ public class WeaponController : MonoBehaviour
 
     public bool CanShoot()
     {
-        Debug.Log("Current Ammo: "+weapon.CurrentAmmo);
         if (cooldownTimer < weapon.GetCooldown() || weapon.CurrentAmmo < 0)
             return false;
         else
@@ -65,9 +55,9 @@ public class WeaponController : MonoBehaviour
 
     public void Reload(int ammo)
     {
-        weapon.CurrentAmmo = ammo;//weapon.MagazineAmmo;
-        //if(isPlayer)
-        //    RefreshAmmoDisplay();
+        weapon.CurrentAmmo += ammo;//weapon.MagazineAmmo;
+        if(weapon.CurrentAmmo > weapon.MagazineAmmo)
+            weapon.CurrentAmmo = weapon.MagazineAmmo;
     }
 
     public bool UseAmmo()
