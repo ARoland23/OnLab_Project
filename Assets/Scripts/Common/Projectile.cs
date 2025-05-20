@@ -1,5 +1,4 @@
 using TopDownPlayer;
-using Unity.Entities.UniversalDelegates;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour

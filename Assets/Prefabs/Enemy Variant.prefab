@@ -65,6 +65,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -5444044110743601799, guid: bfd224d53ddd1784b940aaed76402c24, type: 3}
     - target: {fileID: 7070244892065178647, guid: 1b969c444cf090241ac858a20d8abddc, type: 3}
+      propertyPath: points
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070244892065178647, guid: 1b969c444cf090241ac858a20d8abddc, type: 3}
       propertyPath: WeaponObject
       value: 
       objectReference: {fileID: 3936175607822546096, guid: db308250f21ed4c4181203f5d9f25637, type: 3}

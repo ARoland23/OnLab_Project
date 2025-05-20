@@ -10,6 +10,14 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] private GameObject healthPickup;
     public void PlaceEnemies(List<BoundsInt> roomsList, Vector2Int playerRoomPosition)
     {
+        //if(GameLogic.difficulty == GameLogic.Difficulty.Easy)
+        //    enemyCount = 2;
+        //else if (GameLogic.difficulty == GameLogic.Difficulty.Medium)
+        //    enemyCount = 4;
+        //else if(GameLogic.difficulty == GameLogic.Difficulty.Hard)
+        //    enemyCount = 5;
+        enemyCount = GameLogic.enemyCount;
+
         for (int i = 0; i < enemyCount; i++)
         {
             BoundsInt room;
@@ -33,6 +41,13 @@ public class ObjectPlacer : MonoBehaviour
 
     public void PlaceHealth(List<BoundsInt> roomsList, Vector2Int playerRoomPosition)
     {
+        if (GameLogic.difficulty == GameLogic.Difficulty.Easy)
+            healthPickupCount = 2;
+        else if (GameLogic.difficulty == GameLogic.Difficulty.Medium)
+            healthPickupCount = 1;
+        else if (GameLogic.difficulty == GameLogic.Difficulty.Hard)
+            return;
+
         for (int i = 0; i < healthPickupCount; i++)
         {
             BoundsInt room;

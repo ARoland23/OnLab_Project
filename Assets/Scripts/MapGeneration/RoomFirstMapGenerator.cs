@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,11 +16,15 @@ public class RoomFirstMapGenerator : SimpleRandomWalkMapGenerator
     [SerializeField] private bool RandomWalkRooms = false;
     [SerializeField] private TilemapVisualizerSO[] tilemapVisualizerSOs;
 
-   // private List<BoundsInt> roomsList;
-
+    // private List<BoundsInt> roomsList;
+    private void Start()
+    {
+            RunProceduralGeneration();
+    }
     protected override void RunProceduralGeneration()
     {
         objectPlacer.Clear();
+        tilemapVisualizer.Clear();
         CreateRooms();
     }
 
@@ -31,16 +34,10 @@ public class RoomFirstMapGenerator : SimpleRandomWalkMapGenerator
         tilemapVisualizer.tilemapVisualizerSO = tilemapVisualizerSOs[Random.Range(0, tilemapVisualizerSOs.Length)];
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
         floor = CreateSimpleRooms(roomsList);
-        //floor = CreateDistinctRooms(roomsList,tilemapVisualizerSOs);
         List<Vector2Int> roomCenters = new List<Vector2Int>();
-        //Vector2Int playerRoomPosition = new Vector2Int(int.MaxValue,int.MaxValue);
         foreach (var room in roomsList)
         {
             roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
-
-            //Vector2Int currentRoomPosition = Vector2Int.RoundToInt(room.center);
-            //if (currentRoomPosition.y < playerRoomPosition.y)
-            //    playerRoomPosition = currentRoomPosition;
         }
         var playerRoomPosition = roomCenters.OrderBy(center => center.y).First();
         var player = GameObject.FindWithTag("Player");

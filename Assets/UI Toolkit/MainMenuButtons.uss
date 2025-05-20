@@ -1,0 +1,25 @@
+.mainMenuButtons {
+    font-size: 40px;
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Examples%20&%20Extras/Fonts/Anton.ttf?fileID=12800000&guid=997a43b767814dd0a7642ec9b78cba41&type=3#Anton");
+    -unity-text-outline-width: 0;
+    min-width: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    margin-top: 60px;
+    margin-right: 60px;
+    margin-bottom: 60px;
+    margin-left: 60px;
+}
+
+.mainMenuButtonHover:hover {
+    color: rgb(253, 7, 7);
+    background-color: rgba(115, 110, 110, 0.71);
+}
+
+.radioButtons {
+    font-size: 40px;
+    color: rgb(197, 197, 197);
+}

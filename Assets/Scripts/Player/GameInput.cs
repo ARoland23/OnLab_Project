@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameInput : MonoBehaviour
 {
-    private PlayerInputActions playerInputActions;
+    public PlayerInputActions playerInputActions;
     private void Awake()
     {
         playerInputActions = new PlayerInputActions();
@@ -21,5 +21,11 @@ public class GameInput : MonoBehaviour
     {
         return Camera.main.ScreenToWorldPoint( playerInputActions.Player.Look.ReadValue<Vector2>() );
     }
-
+    private void OnDestroy()
+    {
+        if (playerInputActions != null)
+        {
+            playerInputActions.Player.Disable();
+        }
+    }
 }

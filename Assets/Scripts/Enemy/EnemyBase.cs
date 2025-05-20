@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using TopDownPlayer;
-using Unity.VisualScripting;
-using UnityEditor.Purchasing;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -15,6 +13,7 @@ public class EnemyBase : MonoBehaviour
     private EnemyAnimation enemyAnimation;
     [SerializeField] private GameObject WeaponObject;
     [SerializeField] private LayerMask obstacleMask;
+    [SerializeField] private int points;
 
     private GameObject currentWeaponInstance;
     //private Weapon weapon;
@@ -60,6 +59,15 @@ public class EnemyBase : MonoBehaviour
             enemyAnimation.OnDeath();
             DropWeapon();
             StopAllCoroutines();
+            // add as pts
+            GameLogic.AddScore(points);
+            GameLogic.enemyCount--;
+            if (GameLogic.AllEnemiesDead())
+            {
+                playerTransform.gameObject.GetComponent<Player>().AddAmmoToPoints();
+                SceneManager.LoadSceneAsync("GameOverSceneW");
+            }
+
             Destroy(this);
         }
     }
@@ -98,11 +106,8 @@ public class EnemyBase : MonoBehaviour
     }
     private IEnumerator LookForPlayer()
     {
-        Debug.Log("Look For Player started");
         for (; ; )
        {
-            Debug.Log("Looking for player");
-            Debug.Log($"ObstacleMask value: {obstacleMask.value}");
             Vector2 directionToPlyer = (playerTransform.position - transform.position).normalized;
             float distance = (playerTransform.position - transform.position).magnitude;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlyer, distance, obstacleMask);
@@ -118,7 +123,6 @@ public class EnemyBase : MonoBehaviour
                 //DrawRaycast(transform.position, directionToPlyer, distance, Color.white);
                 rb.linearVelocity = Vector2.zero;
             }
-            Debug.Log("Can see player?: "+canSeePlayer);
             yield return new WaitForSeconds(1f);
         }
     }

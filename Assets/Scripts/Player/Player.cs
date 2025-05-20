@@ -1,7 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace TopDownPlayer
@@ -59,7 +59,51 @@ namespace TopDownPlayer
         public void EquipWeapon(GameObject weaponPrefab)
         {
             string weaponName = weaponPrefab.GetComponent<Weapon>().Name;
+            SaveCurrentAmmo();
 
+            if (weaponInventory.ContainsKey(weaponName))
+            {
+                currentWeaponInstance = Instantiate(weaponInventory[weaponName].weaponPrefab, transform);
+                Weapon weaponComponent = currentWeaponInstance.GetComponent<Weapon>();
+                // there is enough total ammo
+                if (weaponInventory[weaponName].totalAmmo >= weaponComponent.MagazineAmmo)
+                {
+                    weaponComponent.CurrentAmmo = weaponComponent.MagazineAmmo;
+                    weaponInventory[weaponName].totalAmmo -= weaponComponent.MagazineAmmo;
+                }
+                else // not enough total ammo
+                {
+                    weaponComponent.CurrentAmmo = weaponInventory[weaponName].totalAmmo;
+                    weaponInventory[weaponName].totalAmmo = 0;
+                }
+                PlayEquipAnimation(weaponName);
+                RefreshAmmoDisplay();
+            }
+            weaponController.Weapon = currentWeaponInstance.GetComponent<Weapon>();
+
+        }
+
+        private void PlayEquipAnimation(string weaponName)
+        {
+            switch (weaponName)
+            {
+                case ("knife"):
+                    playerAnimation.SwitchToKnife();
+                    break;
+                case ("pistol"):
+                    playerAnimation.SwitchToPistol();
+                    break;
+                case ("rifle"):
+                    playerAnimation.SwitchToRifle();
+                    break;
+                default:
+                    playerAnimation.SwitchToKnife();
+                    break;
+            }
+        }
+
+        private void SaveCurrentAmmo()
+        {
             if (currentWeaponInstance != null)
             {
                 Weapon current = currentWeaponInstance.GetComponent<Weapon>();
@@ -70,42 +114,8 @@ namespace TopDownPlayer
                 }
                 Destroy(currentWeaponInstance);
             }
-
-            if (weaponInventory.ContainsKey(weaponName))
-            {
-                currentWeaponInstance = Instantiate(weaponInventory[weaponName].weaponPrefab, transform);
-                Weapon weaponComponent = currentWeaponInstance.GetComponent<Weapon>();
-                // there is enough total ammo
-                if (weaponInventory[weaponName].totalAmmo >= weaponComponent.MagazineAmmo)
-                {
-                    weaponComponent.CurrentAmmo = weaponComponent.MagazineAmmo;
-                    weaponInventory[weaponName].totalAmmo-= weaponComponent.MagazineAmmo;
-                }
-                else // not enough total ammo
-                {
-                    weaponComponent.CurrentAmmo = weaponInventory[weaponName].totalAmmo;
-                    weaponInventory[weaponName].totalAmmo = 0;
-                }
-                switch (weaponName)
-                {
-                    case ("knife"):
-                        playerAnimation.SwitchToKnife();
-                        break;
-                    case ("pistol"):
-                        playerAnimation.SwitchToPistol();
-                        break;
-                    case ("rifle"):
-                        playerAnimation.SwitchToRifle();
-                        break;
-                    default:
-                        playerAnimation.SwitchToKnife();
-                        break;
-                }
-                RefreshAmmoDisplay();
-            }
-            weaponController.Weapon = currentWeaponInstance.GetComponent<Weapon>();
-
         }
+
         public void PickupWeapon(GameObject weaponPrefab)
         {
             Weapon weapon = weaponPrefab.GetComponent<Weapon>();
@@ -119,10 +129,12 @@ namespace TopDownPlayer
             }
             else  // new pickup
             {
+                SaveCurrentAmmo();
                 weaponInventory[weaponName] = new PlayerWeapon(weaponPrefab, 0);
                 currentWeaponInstance = Instantiate(weaponPrefab, transform);
                 weaponController.Weapon = currentWeaponInstance.GetComponent<Weapon>();
                 weaponController.Weapon.CurrentAmmo = weapon.CurrentAmmo;
+                PlayEquipAnimation(weaponName);
             }
             RefreshAmmoDisplay();
         }
@@ -207,10 +219,29 @@ namespace TopDownPlayer
             {
                 dead = true;
                 rb.simulated = false;
-                GetComponentInChildren<SpriteRenderer>().sortingLayerName = "WalkInFront";
                 playerAnimation.OnDeath();
-                //Destroy(this);
+
+                // not used ammo as pts
+                AddAmmoToPoints();
+                StartCoroutine(DieAndLoadScene());
             }
+        }
+
+        public void AddAmmoToPoints()
+        {
+            int pointsToAdd = 0;
+            foreach (var entry in weaponInventory)
+            {
+                pointsToAdd += entry.Value.totalAmmo;
+            }
+            pointsToAdd += weaponController.Weapon.CurrentAmmo;
+            GameLogic.AddScore(pointsToAdd);
+        }
+
+        private IEnumerator DieAndLoadScene()
+        {
+            yield return new WaitForSeconds(1f); 
+            SceneManager.LoadSceneAsync("GameOverSceneL");
         }
 
         private void Update()
